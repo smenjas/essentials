@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+if [ ! -d .git ]; then
+    echo "fatal: current directory is not a git repository root" >&2
+    exit 1
+fi
+if [ ! -e .gitmodules ]; then
+    echo "fatal: .gitmodules not found" >&2
+    exit 1
+fi
+
+top=$(pwd)
+errors=0
+parents=0
+
+for module in $(list-submodules); do
+    if [ ! -d "$module" ]; then
+        echo "submodule not found: $module" >&2
+        errors=$(($errors+1))
+        continue
+    fi
+    if [ ! -e "$module/.gitmodules" ]; then
+        #echo "no submodules in: $module"
+        continue
+    fi
+    parents=$(($parents+1))
+    cd "$module"
+    update-submodules && git push || errors=$(($errors+1))
+    cd "$top"
+done
+
+if [ $parents -lt 1 ]; then
+    echo "No submodules contain submodules."
+    exit $errors
+fi
+
+git commit -am "Update submodules."
+#git push
+
+exit $errors

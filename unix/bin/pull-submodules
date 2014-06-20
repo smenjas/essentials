@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+parent=$(pwd)
+errors=0
+
+for module in $(list-submodules); do
+    if [ ! -d "$module" ]; then
+        echo "submodule not found: $module"
+        errors=$(($errors+1))
+        continue
+    fi
+    cd "$module"
+    echo "Pulling `pwd`..."
+    git checkout master
+    git pull
+    if [ $? -ne 0 ]; then
+        echo "Pull failed. :-(" >&2
+        errors=$(($errors+1))
+    fi
+    cd "$parent"
+done
+
+exit $errors

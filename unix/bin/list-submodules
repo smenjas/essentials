@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ ! -e .gitmodules ]; then
+    echo "fatal: .gitmodules not found" >&2
+    exit 1
+fi
+
+git submodule | cut -d' ' -f3
+
+exit $?

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ ! -e .git ]; then
+    echo "fatal: current directory is not a git repository" >&2
+    exit 1
+fi
+
+pull-submodules && git commit -am "Update submodules."
+
+exit $?

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+parent=$(pwd)
+
+for module in $(list-submodules); do
+    cd "$module"
+    output=$(git status -s)
+    cd "$parent"
+    if [ -z "$output" ]; then
+        continue
+    fi
+    echo "$module:"
+    echo "$output"
+done
