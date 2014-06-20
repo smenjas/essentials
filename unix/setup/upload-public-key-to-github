@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+read -p "Would you like to upload your public key to GitHub? [yes or no] " ans
+case $ans in
+    [yY] | [yY][eE][sS] )
+        echo ;;
+    * )
+        exit 0 ;;
+esac
+
+key="$HOME/.ssh/id_rsa.pub"
+
+if [ ! -e "$key" ]; then
+    echo "Public key not found at: $key" >&2
+    exit 1
+fi
+
+echo "Here is your public key:"
+cat "$key"
+
+read -p "Press return to open your GitHub SSH key settings in a browser."
+xdg-open https://github.com/settings/ssh
