@@ -1,12 +1,20 @@
 #!/usr/bin/env bash
 
+if [ -n "$1" ]; then
+    if [ ! -d "$1" ]; then
+        echo "fatal: $1 is not a directory" >&2
+        exit 1
+    fi
+    cd "$1"
+fi
+
 if [ ! -d .git ]; then
     echo "fatal: current directory is not a git repository root" >&2
-    exit 1
+    exit 2
 fi
 if [ ! -e .gitmodules ]; then
     echo "fatal: .gitmodules not found" >&2
-    exit 1
+    exit 3
 fi
 
 top=$(pwd)
@@ -20,7 +28,6 @@ for module in $(list-submodules); do
         continue
     fi
     if [ ! -e "$module/.gitmodules" ]; then
-        #echo "no submodules in: $module"
         continue
     fi
     parents=$(($parents+1))
@@ -35,6 +42,6 @@ if [ $parents -lt 1 ]; then
 fi
 
 git commit -am "Update submodules."
-#git push
+git push
 
 exit $errors

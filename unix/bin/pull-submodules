@@ -14,6 +14,7 @@ for module in $(list-submodules); do
     git checkout master
     git pull
     if [ $? -ne 0 ]; then
+        git reset --hard
         echo "Pull failed. :-(" >&2
         errors=$(($errors+1))
     fi

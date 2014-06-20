@@ -5,6 +5,7 @@ if [ ! -e .git ]; then
     exit 1
 fi
 
-pull-submodules && git commit -am "Update submodules."
+pull-submodules
+git commit -am "Update submodules."
 
 exit $?
