@@ -2,6 +2,7 @@
 
 #sudo ./remove-macports
 ./install-homebrew
+./install-homebrew-cask
 
 for pkg in $(cat essential-cmds.txt); do
     brew install "$pkg"
