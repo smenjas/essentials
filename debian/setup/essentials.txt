@@ -6,6 +6,7 @@ git-svn
 gitk
 indent
 nodejs
+npm
 openssh-server
 pv
 python-pip
