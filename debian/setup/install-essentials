@@ -8,6 +8,7 @@ fi
 
 apt-get install -y $(cat essentials.txt)
 
+./install-grunt
 ./install-kernel-dependencies
 ./install-php
 ./install-composer

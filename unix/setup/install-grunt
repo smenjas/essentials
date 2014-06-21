@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# Is there anything to do?
+if [ ! -z $(which grunt) ] && [ "$1" != "-f" ]; then
+    echo "grunt is already installed." >&2
+    echo "Use \"$0 -f\" to force reinstallation." >&2
+    exit 1
+fi
+
+# Are all of the dependencies available?
+if [ -z $(which npm) ]; then
+    echo "fatal: npm not installed" >&2
+    exit 2
+fi
+
+# Do you have permission?
+if [ $UID -ne 0 ]; then
+    echo "fatal: This script must be run as root" >&2
+    echo "usage: sudo $0" >&2
+    exit 3
+fi
+
+echo "Info: http://gruntjs.com/"
+npm install -g grunt-cli
