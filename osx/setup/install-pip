@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ ! -z $(which pip) ] && [ "$1" != "-f" ]; then
-    echo "pip appears to already be installed"
+    echo "pip is already installed"
     echo "Use \"$0 -f\" to force installation."
     exit 1
 fi

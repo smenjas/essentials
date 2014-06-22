@@ -7,7 +7,7 @@ if [ -z $(which brew) ]; then
 fi
 
 if [ ! -z $(brew cask 2>/dev/null) ] && [ "$1" != "-f" ]; then
-    echo "brew cask appears to already be installed"
+    echo "brew cask is already installed"
     echo "Use \"$0 -f\" to force installation."
     exit 2
 fi

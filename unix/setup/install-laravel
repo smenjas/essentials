@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ ! -z $(which laravel) ] && [ "$1" != "-f" ]; then
-    echo "laravel appears to already be installed." >&2
+    echo "laravel is already installed." >&2
     echo "Use \"$0 -f\" to force installation." >&2
     exit 1
 fi
