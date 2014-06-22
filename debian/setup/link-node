@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# Already installed?
+if [ -e /usr/bin/node ]; then
+    echo "/usr/bin/node exists. Nothing to do." >&2
+    exit 1
+fi
+
+# Dependencies present?
+if [ ! -e /usr/bin/nodejs ]; then
+    echo "fatal: /usr/bin/nodejs does not exist" >&2
+    exit 2
+fi
+
+# Do you have permission?
+if [ $UID -ne 0 ]; then
+    echo "fatal: This script must be run as root" >&2
+    echo "usage: sudo $0 $*" >&2
+    exit 3
+fi
+
+echo "ln -s /usr/bin/nodejs /usr/bin/node"
+ln -s /usr/bin/nodejs /usr/bin/node
