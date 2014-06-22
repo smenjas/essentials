@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 
-if [ -z $(which brew) ]; then
-    echo "fatal: Homebrew is not installed." >&2
-    echo "visit: http://brew.sh" >&2
-    exit 1
-fi
-
+# Is there anything to do?
 if [ ! -z $(which php) ] && [ ! -z $(which composer) ] && [ "$1" != "-f" ]; then
     echo "php and composer are already installed." >&2
     echo "Use \"$0 -f\" to force installation." >&2
     exit 0
+fi
+
+# Are all of the dependencies available?
+if [ -z $(which brew) ]; then
+    echo "fatal: Homebrew is not installed." >&2
+    echo "visit: http://brew.sh" >&2
+    exit 1
 fi
 
 echo "See: https://github.com/Homebrew/homebrew-php"
