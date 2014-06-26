@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+# Do we have all the information we need?
+if [ $# -lt 2 ]; then
+    echo "usage: $0 <submodule> <destination>" >&2
+    echo "example: $0 foo ../bar" >&2
+    exit 1
+fi
+
+# Are we in a git repository root?
+if [ ! -d .git ]; then
+    echo "fatal: current directory is not a git repository root" >&2
+    exit 2
+fi
+
+# Remove any trailing slashes.
+module=${1%/}
+yonder=${2%/}
+
+# Can we safely write to the destination?
+if [ -f "$yonder" ] || [ -e "$yonder/$module" ]; then
+    echo "fatal: destination already exists: $yonder" >&2
+    exit 4
+fi
+if [ ! -w "$yonder" ]; then
+    echo "fatal: cannot write to destination: $yonder" >&2
+    exit 5
+fi
+
+from=".git/modules/$module"
+to="$module/.git"
+
+# Check both locations for the repository.
+if [ -d "$from" ]; then
+    # Back up the existing .git file in the submodule working copy.
+    [ -f "$to" ] && mv "$to" "$to~"
+    # Move the repository from the parent to the submodule.
+    mv "$from" "$to"
+elif [ ! -d "$to" ]; then
+    echo "fatal: repository not found" >&2
+    exit 6
+fi
+
+# Delete the "worktree" line from the config file.
+if [ ! -z "$(grep -w worktree "$to/config")" ]; then
+    mv "$to/config" "$to/config~" || exit 7
+    grep -vw worktree "$to/config~" > "$to/config" || exit 8
+fi
+
+# Move the submodule to its new home.
+mv -i "$1" "$2" || exit 9
+
+# Does git know the submodule exists?
+if [ ! -z "$(git submodule status "$module" 2>/dev/null)" ]; then
+    msg="Remove ${module}."
+    git rm "$module" && output=$(git commit -m "$msg") && echo "$output"
+fi
+
+exit $?
