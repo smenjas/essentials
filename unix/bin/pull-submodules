@@ -11,8 +11,8 @@ for module in $(list-submodules); do
     fi
     cd "$module"
     echo "Pulling `pwd`..."
-    git checkout master
-    git pull
+    git checkout -q master
+    git pull -q
     if [ $? -ne 0 ]; then
         git reset --hard
         echo "Pull failed. :-(" >&2
