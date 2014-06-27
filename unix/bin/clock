@@ -2,7 +2,7 @@
 
 # Check arguments.
 if [ $# -lt 1 ]; then
-    echo "usage: $0 <in|out|day|week|list>" >&2
+    echo "usage: $(basename "$0") in|out|day|week|list|note [note]" >&2
     exit 1
 fi
 
@@ -151,6 +151,10 @@ case "$1" in
             echo -n "$dte $(date -d "$dte" +%a) "
             secs2hours "$secs"
         done
+        ;;
+    [nN] | [nN][oO] | [nN][oO][tT] | [nN][oO][tT][eE] )
+        shift
+        action="$*"
         ;;
     * )
         echo "$1 is not a valid argument." >&2
