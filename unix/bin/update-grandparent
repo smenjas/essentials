@@ -32,7 +32,8 @@ for module in $(list-submodules); do
     fi
     parents=$(($parents+1))
     cd "$module"
-    update-submodules && git push || errors=$(($errors+1))
+    update-submodules || errors=$(($errors+1))
+    git push
     cd "$top"
 done
 
