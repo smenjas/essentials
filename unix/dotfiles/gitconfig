@@ -6,6 +6,9 @@
 
 	bd = "branch -d"
 	bm = "branch -m"
+	bra = "branch"
+	brav = "branch -v"
+	brava = "branch -va"
 
 	ca  = "commit --amend -v"
 	caa = "commit --amend -av"
