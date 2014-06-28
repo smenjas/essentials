@@ -60,6 +60,15 @@
 	stu = "status -uno"
 	unstage = reset HEAD --
 
+	sa = "submodule add"
+	si = "submodule init"
+	sd = "submodule deinit"
+	sf = "submodule foreach"
+	sst = "submodule status"
+	ssu = "submodule summary"
+	ssy = "submodule sync"
+	su = "submodule update"
+
 [color]
 	ui = auto
 	status = auto
