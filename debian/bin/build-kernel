@@ -118,6 +118,6 @@ if [ ! -f "$image" ]; then
     exit 8
 fi
 
-read -p "Installing the kernel..."
+echo "Installing the kernel..."
 echo "sudo dpkg -i $image"
 sudo dpkg -i "$image"
