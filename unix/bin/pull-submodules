@@ -13,7 +13,9 @@ for module in $(list-submodules); do
     echo "Pulling `pwd`..."
     git checkout -q master
     git pull -q
-    if [ $? -ne 0 ]; then
+    if [ $? -eq 0 ]; then
+        git gc --auto
+    else
         git reset --hard
         echo "Pull failed. :-(" >&2
         errors=$(($errors+1))
