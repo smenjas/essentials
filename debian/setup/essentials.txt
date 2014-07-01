@@ -5,6 +5,7 @@ git
 git-svn
 gitk
 indent
+multitail
 nodejs
 npm
 openssh-server
