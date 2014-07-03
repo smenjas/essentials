@@ -5,6 +5,7 @@ git
 git-svn
 gitk
 indent
+meld
 multitail
 nodejs
 npm
