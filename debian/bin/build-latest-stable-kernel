@@ -9,6 +9,7 @@ if [ ! -e "$repo/.git" ]; then
 fi
 
 cd "$repo"
+echo "Fetching the latest kernel..."
 git fetch
 checkout-latest-stable-version
 

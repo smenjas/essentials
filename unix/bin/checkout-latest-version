@@ -8,5 +8,4 @@ if [ -z "$tag" ]; then
     exit 1
 fi
 
-echo "git checkout $tag"
 git checkout "$tag"
