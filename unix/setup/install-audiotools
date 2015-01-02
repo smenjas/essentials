@@ -1,0 +1,154 @@
+#!/usr/bin/env bash
+
+# Install the python audiotools and their dependencies.
+
+if [ ! -z "$(which trackinfo)" ] && [ "$1" != "-f" ]; then
+    echo "audiotools are already installed." >&2
+    echo "Use \"$0 -f\" to force installation." >&2
+    echo "Try \"man audiotools-config\" for more information." >&2
+    exit 0
+fi
+
+lib="/usr/local/lib"
+src="$HOME/src"
+tmp="/tmp"
+
+download_dependency () {
+    if [ $# -lt 1 ]; then
+        echo "usage: $0 <sourceforge-project-name>" >&2
+        echo "example: $0 lame" >&2
+        return 1
+    fi
+
+    if [ -z "$(which wget 2> /dev/null)" ]; then
+        echo "fatal: wget is not installed" >&2
+        return 2
+    fi
+
+    local name="$1"
+    local dl="wget"
+    local log="$dl/$name-$(date +%FT%T%z).log"
+    local url="http://sourceforge.net/projects/$name/files/latest/download?source=files"
+
+    echo "Downloading $name..."
+    [ -d "$dl" ] || mkdir "$dl" \
+        || { echo "cannot create directory" >&2; return 3; }
+    wget -nv -P"$dl" -o"$log" "$url" \
+        || { echo "cannot download $name" >&2; return 4; }
+    local redirect=$(tail -n 1 "$log" | cut -d' ' -f3,3 | cut -d: -f2-)
+    echo "Downloaded $redirect"
+    local filename=$(basename "$redirect")
+    mv "$dl/$(basename $url)" "$filename"
+}
+
+prepare_dependency () {
+    if [ $# -lt 2 ]; then
+        echo "usage: $0 <name> <library-name>" >&2
+        echo "example: $0 lame libmp3lame" >&2
+        return 1
+    fi
+
+    local name="$1"
+    local lib_name="$2"
+
+    # The dependency isn't installed.  Do we have the source code?
+    local deps="$tmp/audiotools-dependencies"
+    [ -d "$deps" ] || mkdir "$deps" \
+        || { echo "cannot create directory" >&2; return 2; }
+    cd "$deps"
+    local dir=$(ls -d "$name"-* 2> /dev/null | grep -v '\.tar' | tail -n 1)
+    if [ ! -d "$dir" ]; then
+        # Extracted source unavailable.  Do we have an archive?
+        local tar=$(ls -d "$name"-* 2> /dev/null | grep '\.tar' | tail -n 1)
+        if [ ! -e "$tar" ]; then
+            # Archived source unavailable.  Download it.
+            download_dependency "$name" || return 3
+            local tar=$(ls -d "$name"-* 2> /dev/null | grep '\.tar' | tail -n 1)
+        fi
+        if [ -z "$tar" ]; then
+            echo "fatal: cannot find tar file" >&2
+            return 4
+        fi
+        # Extract the tarball.
+        echo "Extracting $tar..."
+        tar -xf "$tar" || return 5
+        local dir=$(ls -d "$deps/$name"-* | grep -v '\.tar' | tail -n 1)
+    fi
+
+    echo "Installing $(basename "$dir")..."
+    cd "$dir"
+}
+
+install_dependency () {
+    if [ $# -lt 2 ]; then
+        echo "usage: $0 <project-name> <library-name>" >&2
+        echo "example: $0 lame libmp3lame" >&2
+        return 1
+    fi
+
+    local name="$1"
+    local lib_name="$2"
+
+    if [ ! -z "$(ls "$lib/$lib_name".* 2> /dev/null)" ]; then
+        echo "$lib_name is already installed."
+        return 0
+    fi
+
+    prepare_dependency $@ || { echo "cannot install $name" >&2; return 2; }
+
+    echo "./configure"
+    ./configure &> /dev/null \
+        || { echo "Configuration failed." >&2; return 3; }
+    echo "make"
+    make &> /dev/null \
+        || { echo "Compilation failed." >&2; return 4; }
+    echo "sudo make install"
+    sudo make install &> /dev/null \
+        || { echo "Installation failed." >&2; return 5; }
+}
+
+install_dependencies () {
+    install_dependency lame libmp3lame
+    install_dependency mpg123 libmpg123
+}
+
+install_audiotools () {
+    [ ! -d "$src" ] || mkdir -p "$src" \
+        || { echo "fatal: cannot create $src" >&2; return 1; }
+    cd "$src"
+    local pat="$src/python-audio-tools"
+    if [ ! -d "$pat" ]; then
+        echo "Downloading audiotools..."
+        if [ -z "$(which git 2> /dev/null)" ]; then
+            echo "fatal: git is not installed" >&2; return 2
+        fi
+        local git_url="git://github.com/tuffy/python-audio-tools.git"
+        git clone "$git_url" \
+            || { echo "fatal: cannot clone $git_url"; return 3; }
+    fi
+
+    echo "Installing audiotools..."
+    cd "$pat"
+    echo "sudo make clean"
+    sudo make clean &> /dev/null \
+        || { echo "Clean up failed." >&2; return 4; }
+    echo "sudo make install"
+    sudo make install &> /dev/null \
+        || { echo "Installation failed." >&2; return 5; }
+}
+
+install_dependencies
+install_audiotools || exit 1
+
+# Find an mp3 and display its trackinfo.
+music="$HOME/Music"
+if [ ! -d "$music" ]; then
+    music="$HOME"
+fi
+if [ -d "$music" ]; then
+    mp3="$(find "$music" -type f -name *.mp3 | head -n 1)"
+    if [ ! -z "$mp3" ]; then
+        echo "trackinfo \"\$(find \"$music\" -type f -name *.mp3 | head -n 1)\""
+        trackinfo "$mp3" 2> /dev/null
+    fi
+fi
