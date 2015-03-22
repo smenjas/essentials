@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [ $# -lt 2 ]; then
+    echo "usage: $(basename "$0") <user> <project>"
+    exit -1
+fi
+
+curl "https://api.github.com/repos/$1/$2" -H 'Accept: application/vnd.github.drax-preview+json'
