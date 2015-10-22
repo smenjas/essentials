@@ -17,9 +17,11 @@ fi
 echo "See: https://github.com/Homebrew/homebrew-php"
 echo "and: https://getcomposer.org/doc/00-intro.md"
 brew update
-brew tap josegonzalez/homebrew-php
+brew upgrade
+brew tap homebrew/dupes
 brew tap homebrew/versions
-brew install php55-intl
-brew install josegonzalez/php/composer
+brew tap homebrew/homebrew-php
+brew install php56
+brew install composer --ignore-dependencies
 
 exit $?
