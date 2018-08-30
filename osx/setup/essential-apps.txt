@@ -2,6 +2,7 @@ brackets
 calibre
 filezilla
 firefox
+gcc
 google-chrome
 vagrant
 vlc
