@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# Install the Command Line Tools on a Mac.
+
+xcode-select --install
