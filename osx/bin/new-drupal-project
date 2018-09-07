@@ -1,0 +1,156 @@
+#!/usr/bin/env bash
+
+# Prepare a Mac for Drupal VM & BLT, then create a new Drupal 8 project.
+#
+# See: https://blt.readthedocs.io/en/latest/
+
+if [ "$(uname -s)" != "Darwin" ]; then
+    >&2 echo "fatal: This is not a Mac."
+    exit 1
+fi
+
+if [ $# -lt 1 ]; then
+    >&2 echo "usage: $(basename $0) <project>"
+    exit 2
+fi
+
+project="$1"
+
+project="$(echo "$project" | tr '[:upper:]' '[:lower:]')" # Convert to lowercase.
+project="$(echo "$project" | tr '[:blank:][:punct:]' - | tr -s -)" # Convert whitespace and punctuation to hyphens.
+project="${project#-}" # Trim hyphens from the beginning.
+project="${project%-}" # Trim hyphens from the end.
+
+if [ ! "$project" ]; then
+    >&2 echo "fatal: invalid project name, must include a letter or a number"
+    exit 3
+fi
+
+if [ -e "$project_dir" ]; then
+    >&2 echo "fatal: $project_dir already exists"
+    exit 4
+fi
+
+echo "Preparing to build: $project"
+
+src_dir="$HOME/src"
+project_dir="$src_dir/$project"
+project_domain="local.${project}.com"
+guest_path="/var/www/$project"
+
+if [ ! "$(which gcc)" ]; then
+    echo "Installing the Xcode Command Line Tools..."
+    xcode-select --install
+fi
+
+if [ ! "$(which brew)" ]; then
+    echo "Installing Homebrew..."
+    homebrew_url="https://raw.githubusercontent.com/Homebrew/install/master/install"
+    /usr/bin/ruby -e "$(curl -fsSL $homebrew_url)" || {
+        >&2 echo "fatal: Cannot install Homebrew"
+        exit 5
+    }
+fi
+
+echo "Updating Homebrew..."
+brew update
+brew upgrade
+brew cleanup
+brew tap caskroom/cask
+
+if [ ! "$(which php)" ]; then
+    echo "Installing PHP 7.1..."
+    brew install php71
+fi
+
+for pkg in git composer
+do
+    if [ ! "$(which $pkg)" ]; then
+        echo "Installing ${pkg}..."
+        brew install "$pkg"
+    fi
+done
+
+if [ ! "$(which npm)" ]; then
+    echo "Installing npm & nvm..."
+    brew install npm nvm
+fi
+
+for pkg in virtualbox vagrant
+do
+    if [ ! "$(which $pkg)" ]; then
+        echo "Installing ${pkg}..."
+        brew cask install "$pkg"
+    fi
+done
+
+if [ ! "$(vagrant | grep hostsupdater)" ]; then
+    echo "Installing vagrant-hostsupdater..."
+    vagrant plugin install vagrant-hostsupdater
+fi
+
+php_config="/etc/php.ini"
+php_config_default="/etc/php.ini"
+if [ ! -f "$php_config" ]; then
+    if [ -f "$php_config_default" ]; then
+        sudo cp "$php_config_default" "$php_config"
+    else
+        >&2 echo "error: $php_config does not exist, and neither does $php_config_default"
+    fi
+fi
+
+if [ ! -d "$src_dir" ]; then
+    mkdir -p "$src_dir" || {
+        >&2 echo "fatal: cannot create directory $src_dir"
+        exit 6
+    }
+fi
+
+cd "$src_dir" || {
+    >&2 echo "fatal: cannot change directory to $src_dir"
+    exit 7
+}
+
+composer create-project --no-interaction acquia/blt-project "$project" || {
+    >&2 echo "fatal: cannot create $project_dir"
+    exit 8
+}
+
+cd "$project_dir" || {
+    >&2 echo "fatal: cannot change directory to $project_dir"
+    exit 9
+}
+
+git init
+git add .
+git commit -m "Create a new Drupal project using BLT."
+
+if [ ! "$(type blt 2>/dev/null)" ]; then
+    touch ~/.bash_profile
+    composer run-script blt-alias
+    source ~/.bash_profile
+fi
+
+composer install || {
+    >&2 echo "fatal: composer install failed"
+    exit 10
+}
+
+if [ ! "$(type blt 2>/dev/null)" ]; then
+    >&2 echo "fatal: blt command does not exist"
+    exit 11
+fi
+
+blt vm -n || {
+    >&2 echo "fatal: cannot build virtual machine"
+    exit 12
+}
+
+git add .
+git commit -m "Create the $project site."
+
+echo "Building the Drupal site..."
+vagrant ssh -c "cd '$guest_path'; blt setup -n"
+
+echo "Use the one-time login URL below to access your site:"
+vagrant ssh -c "cd '$guest_path'; drush uli --uri $project_domain"
