@@ -8,3 +8,7 @@ alias la="ls -la"
 
 alias megs='du -sm * | sort -nr -k1,1'
 alias gigs='du -sm * | sort -nr -k1,1'
+
+if [ "$(which lolcat)" ]; then
+    alias fortune="fortune | lolcat"
+fi
