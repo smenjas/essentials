@@ -99,6 +99,8 @@ if [ ! -f "$php_config" ]; then
     fi
 fi
 
+composer global require "hirak/prestissimo:^0.3"
+
 if [ ! -d "$src_dir" ]; then
     mkdir -p "$src_dir" || {
         >&2 echo "fatal: cannot create directory $src_dir"
