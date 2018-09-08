@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+# Set up a BLT-based Drupal project to use Heroku.
+
+release_branch="master"
+heroku_remote="heroku"
+docroot="docroot" # This is what BLT uses.
+
+# Authenticate
+heroku login || {
+    >&2 echo "fatal: heroku login failed"
+    exit 1
+}
+
+# From here on commands are project specific.
+if [ ! "$(git status 2>/dev/null)" ]; then
+    >&2 echo "fatal: this is not a git repository"
+    exit 1
+fi
+
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
+if [ ! "$(git remote | grep "$heroku_remote")" ]; then
+    heroku create "$project"
+fi
+
+git push "$heroku_remote" "$release_branch"
+heroku ps:scale web=1
+heroku open
+heroku logs # --tail
+composer require --dev heroku/heroku-buildpack-php
+
+if [ ! -e Procfile ]; then
+    cat "web: vendor/bin/heroku-php-apache2 $docroot/" > Procfile
+fi
+
+# Make logs persistent.
+heroku addons:create papertrail
+
+# Install a MySQL database.
+heroku addons:create cleardb
+
+db_url="$(heroku config | grep CLEARDB_DATABASE_URL | cut -d ' ' -f 2)"
+
+heroku config:set DATABASE_URL="$db_url"
