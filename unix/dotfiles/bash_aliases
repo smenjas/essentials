@@ -12,3 +12,10 @@ alias gigs='du -sm * | sort -nr -k1,1'
 if [ "$(which lolcat)" ]; then
     alias fortune="fortune | lolcat"
 fi
+
+alias cex="vagrant ssh -c 'cd /var/www/$(basename "$PWD"); drush cex -y'"
+alias tbd="vagrant ssh -c 'cd /var/www/$(basename "$PWD"); blt tbd -y'"
+alias tbr="vagrant ssh -c 'cd /var/www/$(basename "$PWD"); blt tbr -y'"
+alias tests="vagrant ssh -c 'cd /var/www/$(basename "$PWD"); blt tests -y'"
+alias uli="vagrant ssh -c 'cd /var/www/$(basename "$PWD"); drush uli --uri local.$(basename "$PWD").com'"
+alias setup="time vagrant ssh -c 'cd /var/www/$(basename "$PWD"); composer install && blt setup -n' && uli"
