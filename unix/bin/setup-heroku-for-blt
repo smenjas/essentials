@@ -1,21 +1,37 @@
 #!/usr/bin/env bash
 
 # Set up a BLT-based Drupal project to use Heroku.
+#
+# See: https://devcenter.heroku.com/articles/getting-started-with-php
 
 release_branch="master"
 heroku_remote="heroku"
 docroot="docroot" # This is what BLT uses.
 
+# Check dependencies.
+if [ ! "$(which php)" ]; then
+    >&2 echo "fatal: php command not found"
+    exit 1
+fi
+if [ ! "$(which composer)" ]; then
+    >&2 echo "fatal: composer command not found"
+    exit 2
+fi
+if [ ! "$(which heroku)" ]; then
+    >&2 echo "fatal: heroku command not found"
+    exit 3
+fi
+
 # Authenticate
 heroku login || {
     >&2 echo "fatal: heroku login failed"
-    exit 1
+    exit 4
 }
 
 # From here on commands are project specific.
 if [ ! "$(git status 2>/dev/null)" ]; then
     >&2 echo "fatal: this is not a git repository"
-    exit 1
+    exit 5
 fi
 
 repo_root="$(git rev-parse --show-toplevel)"
@@ -30,9 +46,11 @@ heroku ps:scale web=1
 heroku open
 heroku logs # --tail
 composer require --dev heroku/heroku-buildpack-php
+git add composer.*
+git commit -m "Add heroku-buildpack-php."
 
 if [ ! -e Procfile ]; then
-    cat "web: vendor/bin/heroku-php-apache2 $docroot/" > Procfile
+    echo "web: vendor/bin/heroku-php-apache2 $docroot/" > Procfile
 fi
 
 # Make logs persistent.
