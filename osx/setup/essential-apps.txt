@@ -5,4 +5,5 @@ firefox
 gcc
 google-chrome
 vagrant
+visual-studio-code
 vlc
