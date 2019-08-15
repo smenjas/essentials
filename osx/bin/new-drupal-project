@@ -156,3 +156,11 @@ vagrant ssh -c "cd '$guest_path'; blt setup -n"
 
 echo "Use the one-time login URL below to access your site:"
 vagrant ssh -c "cd '$guest_path'; drush uli --uri $project_domain"
+
+echo "Edit the commit message pattern in this file:"
+echo
+echo "    $project_dir/vendor/acquia/blt/config/build.yml"
+echo
+echo "Add the change to the git index with:"
+echo
+echo "    $ git add -f vendor/acquia/blt/config/build.yml"
