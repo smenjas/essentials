@@ -2,7 +2,6 @@ brackets
 calibre
 filezilla
 firefox
-gcc
 google-chrome
 vagrant
 visual-studio-code
