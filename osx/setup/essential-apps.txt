@@ -2,6 +2,7 @@ calibre
 filezilla
 firefox
 google-chrome
+graphiql
 vagrant
 visual-studio-code
 vlc
