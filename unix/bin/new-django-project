@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+# Create a new Django project.
+
+if [ $# -lt 1 ]; then
+    >&2 echo "usage: $(basename $0) <project-name>"
+    exit 1
+else
+    project="$1"
+fi
+
+install_django() {
+    # If both Python 2 & Python 3 are installed, use Python 3.
+    if [ "$(which pip3)" ]; then
+        pip="pip3"
+    elif [ "$(which pip)" ]; then
+        pip="pip"
+    else
+        >&2 echo "fatal: pip is not installed"
+        exit 2
+    fi
+    if [ "$(which python3)" ]; then
+        python="python3"
+    elif [ "$(which python)" ]; then
+        python="python"
+    else
+        >&2 echo "fatal: python is not installed"
+        exit 3
+    fi
+    echo "Using $python and ${pip}..."
+
+    django_version="$($python -m django --version 2>/dev/null)"
+
+    if [ "$django_version" ]; then
+        echo "Django $django_version is already installed."
+    else
+        $pip install django || {
+            >&2 echo "fatal: Cannot install django"
+            exit 4
+        }
+
+        django_version="$($python -m django --version)"
+        echo "Django $django_version is now installed."
+    fi
+}
+
+install_django
+
+if [ -e "$project" ]; then
+    echo "$project already exists in this directory."
+else
+    django-admin startproject "$project" || {
+        >&2 echo "fatal: Cannot start a new Django project."
+        exit 5
+    }
+    echo "Created a new Django project in the directory: $project"
+fi
+
+echo
+echo "You can start a local web server with these commands:"
+echo
+echo "  $ cd $project"
+echo "  $ $python manage.py runserver"
+echo
