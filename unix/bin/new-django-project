@@ -2,63 +2,165 @@
 
 # Create a new Django project.
 
-if [ $# -lt 1 ]; then
-    >&2 echo "usage: $(basename $0) <project-name>"
-    exit 1
-else
-    project="$1"
-fi
+help() {
+    if [ $# -lt 2 ]; then
+        >&2 echo "usage: $0 python project"
+        >&2 echo "python: The python command on your system (usually python or python3)"
+        >&2 echo "project: The name of your Django project"
+        return 1
+    fi
+
+    local python="$1"
+    local project="$2"
+
+    echo "Let's start with the basics of using the Django command line."
+    echo
+    echo "You can start a local web server with these commands:"
+    echo
+    echo "  $ cd $project"
+    echo "  $ $python manage.py runserver"
+    echo
+    echo "To log in as the site administrator, run these commands:"
+    echo
+    echo "  $ $python manage.py migrate"
+    echo "  $ $python manage.py createsuperuser"
+    echo
+
+    echo
+    echo "Now let's dive in to Django development."
+    echo
+    echo "In Django, \"apps\" are components of a site, like a blog or a store."
+    echo "To create a new app on your site, use these commands:"
+    echo
+    echo "  $ $python manage.py startapp \$app"
+    echo
+    echo "where \$app is the name of your app, \"blog\" for example."
+    echo
+
+    echo
+    echo "Create new templates under: \$app/templates/\$app/"
+    echo
+    echo "  $ mkdir -p \$app/templates/\$app"
+    echo
+
+    echo
+    echo "Define your database model in: \$app/model.py"
+    echo "Then:"
+    echo
+    echo "  $ $python manage.py makemigrations"
+    echo
+    echo "will create a file in \$app/migrations/0001_initial.py"
+    echo "(or something like that)."
+    echo
+    echo "To see the SQL for your migration, use:"
+    echo
+    echo "  $ $python manage.py sqlmigrate \$app 0001"
+    echo
+    echo "Use the number you got from your own migration if it isn't 0001."
+    echo
+    echo "To execute your migration, use:"
+    echo
+    echo "  $ $python manage.py migrate"
+    echo
+    echo "Add your model to the admin page in: \$app/admin.py"
+    echo
+    echo "Import the model, then register it, like so:"
+    echo
+    echo "    from .models import MyModel"
+    echo
+    echo "    admin.site.register(MyModel)"
+    echo
+
+    echo
+    echo "You can start an interactive shell with:"
+    echo
+    echo "  $ $python manage.py shell"
+    echo
+}
 
 install_django() {
-    # If both Python 2 & Python 3 are installed, use Python 3.
-    if [ "$(which pip3)" ]; then
-        pip="pip3"
-    elif [ "$(which pip)" ]; then
-        pip="pip"
-    else
-        >&2 echo "fatal: pip is not installed"
-        exit 2
+    if [ $# -lt 2 ]; then
+        >&2 echo "usage: $0 python pip"
+        >&2 echo "python: The python command on your system"
+        >&2 echo "pip: The pip command on your system"
+        >&2 echo "Usually python or python3, and pip or pip3."
+        return 1
     fi
-    if [ "$(which python3)" ]; then
-        python="python3"
-    elif [ "$(which python)" ]; then
-        python="python"
-    else
-        >&2 echo "fatal: python is not installed"
-        exit 3
-    fi
-    echo "Using $python and ${pip}..."
+
+    local python="$1"
+    local pip="$2"
 
     django_version="$($python -m django --version 2>/dev/null)"
 
     if [ "$django_version" ]; then
         echo "Django $django_version is already installed."
-    else
-        $pip install django || {
-            >&2 echo "fatal: Cannot install django"
-            exit 4
-        }
+        return 0
+    fi
 
-        django_version="$($python -m django --version)"
-        echo "Django $django_version is now installed."
+    $pip install django || {
+        >&2 echo "fatal: Cannot install django"
+        exit 4
+    }
+
+    django_version="$($python -m django --version 2>/dev/null)"
+    echo "Django $django_version is now installed."
+}
+
+create_django_project() {
+    if [ $# -lt 1 ]; then
+        >&2 echo "usage: $0 project"
+        >&2 echo "project: The name of your Django project"
+        return 1
+    fi
+
+    local project="$1"
+
+    if [ -e "$project" ]; then
+        echo "$project already exists in this directory."
+    else
+        django-admin startproject "$project" || {
+            >&2 echo "fatal: Cannot start a new Django project."
+            exit 5
+        }
+        echo "Created a new Django project in the directory: $project"
     fi
 }
 
-install_django
-
-if [ -e "$project" ]; then
-    echo "$project already exists in this directory."
+# Which command should we use for Python?  Many developers have `python` running
+# version 2 and `python3` running version 3.  If both are present, use `python3`.
+if [ "$(which pip3)" ]; then
+    pip="pip3"
+elif [ "$(which pip)" ]; then
+    pip="pip"
 else
-    django-admin startproject "$project" || {
-        >&2 echo "fatal: Cannot start a new Django project."
-        exit 5
-    }
-    echo "Created a new Django project in the directory: $project"
+    >&2 echo "fatal: pip is not installed"
+    exit 1
+fi
+if [ "$(which python3)" ]; then
+    python="python3"
+elif [ "$(which python)" ]; then
+    python="python"
+else
+    >&2 echo "fatal: python is not installed"
+    exit 2
+fi
+echo "Using the commands $python and ${pip}..."
+
+$python --version
+$pip --version
+echo
+
+if [ $# -lt 1 ]; then
+    >&2 echo "usage: $(basename $0) <project-name>"
+    >&2 echo "   or: $(basename $0) --help"
+    exit 3
+elif [ "$1" == "--help" ]; then
+    help "$python" "my_project" | less -FRX
+    exit 0
+else
+    project="$1"
 fi
 
-echo
-echo "You can start a local web server with these commands:"
-echo
-echo "  $ cd $project"
-echo "  $ $python manage.py runserver"
-echo
+install_django "$python" "$pip"
+create_django_project "$project"
+help "$python" "$project" | less -FRX
