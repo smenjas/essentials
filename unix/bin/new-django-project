@@ -102,6 +102,11 @@ install_django() {
         exit 4
     }
 
+    $pip install django-crispy-forms || {
+        >&2 echo "fatal: Cannot install django"
+        exit 4
+    }
+
     django_version="$($python -m django --version 2>/dev/null)"
     echo "Django $django_version is now installed."
 }
