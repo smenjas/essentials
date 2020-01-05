@@ -4,6 +4,7 @@ git
 multitail
 nodejs
 pv
+python3
 rsync
 tmux
 tree
