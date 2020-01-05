@@ -1,6 +1,7 @@
 curl
 gcc
 git
+go
 multitail
 nodejs
 pv
