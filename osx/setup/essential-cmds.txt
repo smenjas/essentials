@@ -1,3 +1,4 @@
+clisp
 curl
 gcc
 git
