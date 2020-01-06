@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+# Prepare a Mac for Drupal VM & BLT.
+#
+# See: https://blt.readthedocs.io/en/latest/
+
+if [ "$(uname -s)" != "Darwin" ]; then
+    >&2 echo "fatal: This is not a Mac."
+    exit 1
+fi
+
+if [ ! "$(which gcc)" ]; then
+    echo "Installing the Xcode Command Line Tools..."
+    xcode-select --install
+fi
+
+if [ ! "$(which brew)" ]; then
+    echo "Installing Homebrew..."
+    homebrew_url="https://raw.githubusercontent.com/Homebrew/install/master/install"
+    /usr/bin/ruby -e "$(curl -fsSL $homebrew_url)" || {
+        >&2 echo "fatal: Cannot install Homebrew"
+        exit 5
+    }
+fi
+
+brew update
+brew upgrade
+brew cleanup
+brew doctor
+brew tap caskroom/cask
+
+if [ ! "$(which php)" ]; then
+    echo "Installing PHP 7.1..."
+    brew install php71
+fi
+
+for pkg in git composer
+do
+    if [ ! "$(which $pkg)" ]; then
+        echo "Installing ${pkg}..."
+        brew install "$pkg"
+    fi
+done
+
+if [ ! "$(which npm)" ]; then
+    echo "Installing npm & nvm..."
+    brew install npm nvm
+fi
+
+for pkg in virtualbox vagrant
+do
+    if [ ! "$(which $pkg)" ]; then
+        echo "Installing ${pkg}..."
+        brew cask install "$pkg"
+    fi
+done
+
+if [ ! "$(vagrant | grep hostsupdater)" ]; then
+    echo "Installing vagrant-hostsupdater..."
+    vagrant plugin install vagrant-hostsupdater
+fi
+
+php_config="/etc/php.ini"
+php_config_default="/etc/php.ini"
+if [ ! -f "$php_config" ]; then
+    if [ -f "$php_config_default" ]; then
+        sudo cp "$php_config_default" "$php_config"
+    else
+        >&2 echo "error: $php_config does not exist, and neither does $php_config_default"
+    fi
+fi
+
+if [ ! -d "$src_dir" ]; then
+    mkdir -p "$src_dir" || {
+        >&2 echo "fatal: cannot create directory $src_dir"
+        exit 6
+    }
+fi
