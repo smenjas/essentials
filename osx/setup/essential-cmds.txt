@@ -4,6 +4,7 @@ gcc
 git
 go
 ipython
+jupyter
 multitail
 nodejs
 pv
