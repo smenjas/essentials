@@ -15,3 +15,10 @@ if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
 fi
 source ~/.git-completion.bash
+
+# For compilers to find openblas you may need to set:
+export LDFLAGS="-L/usr/local/opt/openblas/lib"
+export CPPFLAGS="-I/usr/local/opt/openblas/include"
+
+# For pkg-config to find openblas you may need to set:
+export PKG_CONFIG_PATH="/usr/local/opt/openblas/lib/pkgconfig"

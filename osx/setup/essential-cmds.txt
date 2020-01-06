@@ -9,6 +9,7 @@ multitail
 nodejs
 pv
 python3
+r
 rsync
 tmux
 tree
