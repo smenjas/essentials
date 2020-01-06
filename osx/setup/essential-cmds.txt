@@ -3,6 +3,7 @@ curl
 gcc
 git
 go
+ipython
 multitail
 nodejs
 pv
