@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# Check for the required filename argument.
+if [ $# -eq 0 ] ; then
+    echo "Compute the SHA1 hash of a given file."
+    echo "Usage: $0 <filename>"
+    exit 1
+fi
+
+# Compute the hash of the specified file.
+hash1=$(openssl sha1 "$1" | cut -d' ' -f2)
+echo -n "$hash1"
+
+hash2=""
+
+# Check for a second argument.
+if [ $# -ge 2 ] ; then
+    hash2="$2"
+# Otherwise, see if there's a matching file containing the target hash.
+elif [ -r "$1.sha1" ] ; then
+    hash2=$(cat "$1.sha1")
+fi
+
+echo -n " $hash2"
+
+# If we don't have a hash to compare, default to failure.
+if [ "$hash1" = "$hash2" ] ; then
+    echo " pass"
+else
+    echo " FAIL" 2>&1
+    exit -1
+fi
