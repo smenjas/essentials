@@ -12,6 +12,7 @@ python3
 r
 rakudo
 rsync
+tcl-tk
 tmux
 tree
 vim
