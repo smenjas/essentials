@@ -8,6 +8,7 @@ jupyter
 multitail
 nodejs
 pv
+pypy
 python3
 r
 rakudo
