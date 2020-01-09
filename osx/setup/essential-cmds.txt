@@ -16,6 +16,7 @@ rakudo
 rsync
 scala
 tcl-tk
+typescript
 tmux
 tree
 vim
