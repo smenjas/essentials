@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+brew tap dart-lang/dart
+brew install dart
