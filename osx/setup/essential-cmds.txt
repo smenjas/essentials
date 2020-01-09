@@ -5,6 +5,7 @@ git
 go
 ipython
 jupyter
+kotlin
 multitail
 nodejs
 pv
