@@ -3,6 +3,7 @@ filezilla
 firefox
 google-chrome
 graphiql
+java
 julia
 vagrant
 visual-studio-code
