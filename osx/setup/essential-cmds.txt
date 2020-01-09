@@ -13,6 +13,7 @@ python3
 r
 rakudo
 rsync
+scala
 tcl-tk
 tmux
 tree
