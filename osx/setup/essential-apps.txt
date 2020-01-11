@@ -1,6 +1,7 @@
 calibre
 filezilla
 firefox
+gfortran
 google-chrome
 graphiql
 java
