@@ -1,0 +1,7 @@
+django
+flask
+numpy
+pandas
+pylint
+scipy
+scikit-learn

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+for mod in $(cat python-modules.txt); do
+    if [ "$(pip3 show $mod 2>/dev/null)" ]; then
+        echo "$mod is already installed."
+    else
+        pip3 install "$mod"
+    fi
+done
