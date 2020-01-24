@@ -1,6 +1,7 @@
 clisp
 clojure
 curl
+deno
 gcc
 git
 go
