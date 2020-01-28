@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Show the git status for a directory of repositories.
+
+for repo in $(find . -name .git -type d); do
+    repo="${repo%/*}" # Remove trailing /.git
+    repo="${repo#./}" # Remove leading ./
+    cd "$repo" || continue
+    status="$(git st -s | grep -v ^??)"
+    if [ "$status" ]; then
+        echo "$repo:"
+        echo "$status"
+    fi
+    cd - > /dev/null
+done
