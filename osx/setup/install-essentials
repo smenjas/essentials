@@ -23,4 +23,4 @@ for pkg in $(cat essential-apps.txt); do
     fi
 done
 
-sudo ./install-pip
+./install-python-modules
