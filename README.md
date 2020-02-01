@@ -1,6 +1,16 @@
-# Web Development Essentials
+# Web Development Essentials for Linux & Mac
 
-My basic needs for a Unix environment.  I make Web sites.
+## What?
+These scripts and dotfiles configure a Mac or Linux system for software
+development.
+
+## Why?
+So I can set up my development environment automatically, not manually.
+
+## Who?
+- I tend to focus on backend web development and data science.
+- I used to mostly write PHP, but I've switched to Python.
+- I prefer Linux and Mac.
 
 ## Setup
 
