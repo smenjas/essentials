@@ -1,3 +1,4 @@
+beautifulsoup4
 django
 django-allauth
 django-click
@@ -11,11 +12,14 @@ django-rest-swagger
 djangocms-installer
 djangorestframework
 flask
+html5lib
+lxml
 markdown
 mezzanine
 numpy
 pandas
 pylint
+requests
 scipy
 scikit-learn
 virtualenv
