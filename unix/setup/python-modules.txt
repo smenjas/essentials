@@ -22,5 +22,6 @@ pylint
 requests
 scipy
 scikit-learn
+selenium
 virtualenv
 wagtail
