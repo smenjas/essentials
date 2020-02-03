@@ -2,6 +2,7 @@ clisp
 clojure
 curl
 deno
+emacs
 gcc
 git
 go
