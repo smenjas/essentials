@@ -1,5 +1,4 @@
 calibre
-filezilla
 firefox
 gfortran
 google-chrome

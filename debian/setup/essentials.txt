@@ -1,6 +1,5 @@
 calibre
 curl
-filezilla
 git
 git-svn
 gitk
