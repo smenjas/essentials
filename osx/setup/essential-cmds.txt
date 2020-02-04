@@ -4,6 +4,7 @@ curl
 deno
 emacs
 gcc
+geckodriver
 git
 go
 ipython
