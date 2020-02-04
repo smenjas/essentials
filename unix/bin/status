@@ -6,7 +6,7 @@ for repo in $(find . -name .git -type d); do
     repo="${repo%/*}" # Remove trailing /.git
     repo="${repo#./}" # Remove leading ./
     cd "$repo" || continue
-    status="$(git st -s | grep -v ^??)"
+    status="$(git status -s | grep -v ^??)"
     if [ "$status" ]; then
         echo "$repo:"
         echo "$status"
