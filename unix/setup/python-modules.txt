@@ -1,4 +1,6 @@
 beautifulsoup4
+behave
+behave-django
 django
 django-allauth
 django-click
@@ -19,6 +21,8 @@ mezzanine
 numpy
 pandas
 pylint
+pytest
+pytest-bdd
 requests
 scipy
 scikit-learn
