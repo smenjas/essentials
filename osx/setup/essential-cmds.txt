@@ -5,6 +5,7 @@ deno
 emacs
 gcc
 geckodriver
+gh
 git
 go
 ipython
