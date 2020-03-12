@@ -8,4 +8,3 @@ julia
 vagrant
 visual-studio-code
 vlc
-zoom
