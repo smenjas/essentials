@@ -29,5 +29,6 @@ requests
 scipy
 scikit-learn
 selenium
+stanza
 virtualenv
 wagtail
