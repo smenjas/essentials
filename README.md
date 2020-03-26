@@ -31,5 +31,6 @@ bottom, and tell git your name and email address.
 
 Voila!  My idea of a basic development environment.
 
-## License Released as open source software under the terms of the [ISC
+## License
+Released as open source software under the terms of the [ISC
 License](https://en.wikipedia.org/wiki/ISC_license).
