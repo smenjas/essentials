@@ -6,6 +6,7 @@ graphiql
 java
 julia
 spectacle
+steam
 vagrant
 visual-studio-code
 vlc
