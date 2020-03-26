@@ -5,6 +5,7 @@ google-chrome
 graphiql
 java
 julia
+spectacle
 vagrant
 visual-studio-code
 vlc
