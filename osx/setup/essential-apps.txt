@@ -1,4 +1,5 @@
 calibre
+discord
 firefox
 gfortran
 google-chrome
