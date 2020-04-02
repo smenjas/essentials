@@ -15,6 +15,7 @@ django-rest-swagger
 djangocms-installer
 djangorestframework
 flask
+folium
 html5lib
 lxml
 markdown
