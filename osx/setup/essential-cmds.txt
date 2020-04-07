@@ -20,6 +20,7 @@ r
 rakudo
 ripgrep
 rsync
+rust
 scala
 tcl-tk
 typescript
