@@ -8,6 +8,7 @@ java
 julia
 spectacle
 steam
+transmission
 vagrant
 visual-studio-code
 vlc
