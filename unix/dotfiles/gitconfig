@@ -1,4 +1,12 @@
+#[user]
+#	name = Your Name
+#	email = you@example.com
+
 [alias]
+        hist = "log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short"
+        type = cat-file -t
+        dump = cat-file -p
+
 	bb = "bisect bad"
 	bg = "bisect good"
 	br = "bisect reset"
@@ -90,7 +98,3 @@
 
 [push]
 	default = simple
-
-#[user]
-#	name = Your Name
-#	email = you@example.com
