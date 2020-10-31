@@ -78,6 +78,7 @@
 
 [core]
 	autocrlf = input
+	safecrlf = true
 	editor = vim
 
 [diff]
