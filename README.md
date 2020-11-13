@@ -8,7 +8,7 @@ development.
 So I can set up my development environment automatically, not manually.
 
 ## Who made this?
-- I'm a web developer who who mostly writes JavaScript, Python, & PHP.
+- I'm a web developer who mostly writes JavaScript, Python, & PHP.
 - I prefer Linux and Mac development environments.
 
 ## Setup
