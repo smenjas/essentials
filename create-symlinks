@@ -31,7 +31,7 @@ target="$HOME"
 
 case $(uname -s) in
     "Darwin" )
-        os="osx" ;;
+        os="macos" ;;
     "Linux" )
         if [ -e /etc/debian_version ]; then
             os="debian"
