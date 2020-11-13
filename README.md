@@ -25,8 +25,8 @@ the appropriate directory for your operating system.  This way you can have
 different implementations on different systems.
 
 If you don't already have a ~/.gitconfig, the setup script will copy the
-example (this/dotfiles/gitconfig) and open a text editor.  Scroll to the
-bottom, and tell git your name and email address.
+example (this/dotfiles/gitconfig) and open a text editor.  Tell git your name
+and email address.
 
 Voila!  My idea of a basic development environment.
 
