@@ -13,6 +13,7 @@ jupyter
 kotlin
 multitail
 nodejs
+postman
 pv
 pypy3
 python3
