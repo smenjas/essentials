@@ -51,7 +51,7 @@ for pkg in virtualbox vagrant
 do
     if [ ! "$(which $pkg)" ]; then
         echo "Installing ${pkg}..."
-        brew cask install "$pkg"
+        brew install --cask "$pkg"
     fi
 done
 

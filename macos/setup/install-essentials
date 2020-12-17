@@ -11,14 +11,14 @@ for pkg in $(cat essential-cmds.txt); do
     fi
 done
 
-cask_list="$(brew cask list | tr \\t \\n)"
+cask_list="$(brew list --cask | tr \\t \\n)"
 for pkg in $(cat essential-apps.txt); do
     if [ "$(echo $cask_list | grep $pkg)" ]; then
         echo "$pkg is already installed."
     elif [ "$(ls -1 /Applications | grep -i "$pkg.app")" ]; then
         echo "$pkg exists in /Applications."
     else
-        brew cask install "$pkg"
+        brew install --cask "$pkg"
     fi
 done
 
