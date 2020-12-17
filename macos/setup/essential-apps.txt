@@ -6,6 +6,7 @@ google-chrome
 graphiql
 java
 julia
+mysqlworkbench
 pycharm
 spectacle
 steam
