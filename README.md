@@ -1,5 +1,7 @@
 # Web Development Essentials for Linux & Mac
 
+![Octocat](octocat.png)
+
 ## What is this?
 These scripts and dotfiles configure a Mac or Linux system for software
 development.
