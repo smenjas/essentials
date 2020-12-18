@@ -23,6 +23,7 @@ ripgrep
 rsync
 rust
 scala
+sqlite
 tcl-tk
 typescript
 tmux
