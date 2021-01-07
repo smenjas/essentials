@@ -14,6 +14,7 @@ kotlin
 maven
 multitail
 nodejs
+obs
 postman
 pv
 pypy3
