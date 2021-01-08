@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# Install Mongo DB.
+
+if [ "$(which mongod)" ]; then
+    >&2 echo "Mongo DB is already installed."
+    exit 1
+fi
+
+if [ ! "$(which brew)" ]; then
+    >&2 echo "fatal: Homebrew is not installed."
+    >&2 echo "visit: https://brew.sh/"
+    exit 2
+fi
+
+brew tap mongodb/brew
+
+if [ ! "$(brew tap | grep mongodb)" ]; then
+    >&2 echo "fatal: No repo available for Mongo DB."
+    exit 3
+fi
+
+brew install mongodb-community@4.4
+
