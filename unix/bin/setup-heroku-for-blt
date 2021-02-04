@@ -4,7 +4,7 @@
 #
 # See: https://devcenter.heroku.com/articles/getting-started-with-php
 
-release_branch="master"
+release_branch="main"
 heroku_remote="heroku"
 docroot="docroot" # This is what BLT uses.
 
