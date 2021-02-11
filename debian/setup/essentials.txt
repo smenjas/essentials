@@ -9,6 +9,7 @@ golang
 indent
 ipython
 jupyter
+maven
 meld
 multitail
 nodejs
