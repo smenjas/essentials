@@ -1,5 +1,6 @@
 calibre
 clisp
+clojure
 curl
 emacs
 git
