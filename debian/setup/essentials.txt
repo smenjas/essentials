@@ -22,6 +22,7 @@ rakudo
 ripgrep
 r-base
 rsync
+rustc
 sqlite
 tmux
 tree
