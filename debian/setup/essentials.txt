@@ -26,6 +26,7 @@ rustc
 sqlite
 tmux
 tree
+node-typescript
 vagrant
 vim
 vlc

@@ -28,8 +28,8 @@ rust
 scala
 sqlite
 tcl-tk
-typescript
 tmux
 tree
+typescript
 vim
 wget
