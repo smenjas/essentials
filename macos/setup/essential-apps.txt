@@ -6,6 +6,7 @@ google-chrome
 graphiql
 java
 julia
+meld
 mysqlworkbench
 pycharm
 sketchup
