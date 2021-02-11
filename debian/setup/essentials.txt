@@ -1,5 +1,6 @@
 calibre
 curl
+emacs
 git
 git-svn
 gitk
