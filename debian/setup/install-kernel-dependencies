@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "Info: http://www.debian.org/releases/stable/i386/ch08s06.html.en"
+echo "Info: https://www.debian.org/doc/manuals/debian-kernel-handbook/ch-common-tasks.html"
 
 if [ $UID -ne 0 ]; then
     echo "fatal: This script must be run as root." >&2
@@ -8,4 +8,14 @@ if [ $UID -ne 0 ]; then
     exit 1
 fi
 
-apt-get install fakeroot kernel-package libncurses5-dev
+apt-get -y install build-essential fakeroot devscripts
+apt-get -y build-dep linux
+#apt-get source linux
+
+echo
+echo "Please use:"
+echo
+echo "    git clone https://salsa.debian.org/kernel-team/linux.git"
+echo
+echo "to retrieve the latest updates to the kernel source code."
+echo
