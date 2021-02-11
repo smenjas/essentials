@@ -35,6 +35,7 @@ rustc
 scala
 sqlite
 tmux
+transmission
 tree
 node-typescript
 vagrant
