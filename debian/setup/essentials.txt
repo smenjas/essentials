@@ -12,6 +12,7 @@ jupyter
 meld
 multitail
 nodejs
+obs-studio
 npm
 openssh-server
 pv
