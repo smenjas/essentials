@@ -9,6 +9,7 @@ golang
 indent
 ipython
 jupyter
+mariadb-server
 maven
 meld
 multitail
