@@ -3,6 +3,8 @@ chromium
 clisp
 clojure
 curl
+default-jdk
+default-jre
 emacs
 git
 git-svn
