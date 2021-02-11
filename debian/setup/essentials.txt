@@ -1,4 +1,5 @@
 calibre
+clisp
 curl
 emacs
 git
