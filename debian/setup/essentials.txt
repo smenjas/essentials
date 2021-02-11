@@ -10,6 +10,8 @@ nodejs
 npm
 openssh-server
 pv
+pypy3
+python3
 python-pip
 rsync
 tmux
