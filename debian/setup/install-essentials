@@ -10,4 +10,5 @@ apt-get install -y $(cat essentials.txt)
 
 ./install-grunt
 ./link-node
+./install-visual-studio-code
 ./install-kernel-dependencies
