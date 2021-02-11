@@ -12,6 +12,7 @@ gitk
 golang
 indent
 ipython
+julia
 jupyter
 mariadb-server
 maven
