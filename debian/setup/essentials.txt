@@ -18,6 +18,7 @@ pv
 pypy3
 python3
 python-pip
+rakudo
 r-base
 rsync
 sqlite
