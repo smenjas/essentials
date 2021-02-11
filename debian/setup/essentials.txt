@@ -5,6 +5,7 @@ emacs
 git
 git-svn
 gitk
+golang
 indent
 ipython
 jupyter
