@@ -6,6 +6,7 @@ curl
 default-jdk
 default-jre
 emacs
+gfortran
 git
 git-svn
 gitk
