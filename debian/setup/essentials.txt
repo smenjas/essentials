@@ -1,4 +1,5 @@
 calibre
+chromium
 clisp
 clojure
 curl
