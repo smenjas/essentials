@@ -27,6 +27,7 @@ ripgrep
 r-base
 rsync
 rustc
+scala
 sqlite
 tmux
 tree
