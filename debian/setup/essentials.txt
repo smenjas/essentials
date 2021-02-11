@@ -4,6 +4,8 @@ git
 git-svn
 gitk
 indent
+ipython
+jupyter
 meld
 multitail
 nodejs
