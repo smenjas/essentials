@@ -11,6 +11,8 @@ for pkg in $(cat essential-cmds.txt); do
     fi
 done
 
+npm install -g express-generator
+
 cask_list="$(brew list --cask | tr \\t \\n)"
 for pkg in $(cat essential-apps.txt); do
     if [ "$(echo $cask_list | grep $pkg)" ]; then
