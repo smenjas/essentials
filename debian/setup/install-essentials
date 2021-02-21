@@ -12,3 +12,5 @@ apt-get install -y $(cat essentials.txt)
 ./link-node
 ./install-visual-studio-code
 ./install-kernel-dependencies
+
+npm install -g express-generator
