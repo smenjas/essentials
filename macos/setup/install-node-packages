@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+packages=(
+    npm
+    express-generator
+    yarn
+)
+
+for package in packages; do
+    npm install -g "$package"
+done
+
+npm audit fix
+

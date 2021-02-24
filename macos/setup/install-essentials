@@ -3,6 +3,7 @@
 #sudo ./remove-macports
 ./install-homebrew
 
+# Install command line programs.
 for pkg in $(cat essential-cmds.txt); do
     if [ "$(which $pkg)" ]; then
         echo "$pkg is already installed."
@@ -11,8 +12,7 @@ for pkg in $(cat essential-cmds.txt); do
     fi
 done
 
-npm install -g express-generator
-
+# Install GUI programs.
 cask_list="$(brew list --cask | tr \\t \\n)"
 for pkg in $(cat essential-apps.txt); do
     if [ "$(echo $cask_list | grep $pkg)" ]; then
@@ -24,4 +24,5 @@ for pkg in $(cat essential-apps.txt); do
     fi
 done
 
+./install-node-packages
 ./install-python-modules
