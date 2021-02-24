@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+for dep in npm git express; do
+    if [ ! "$(which $dep)" ]; then
+        >&2 echo "fatal: $dep is not installed"
+        exit 1
+    fi
+done
+
+if [ $# -lt 1 ]; then
+    >&2 echo
+    >&2 echo "usage: $(basename $0) app"
+    >&2 echo "... where \"app\" is the directory name to be created."
+    >&2 echo
+    exit 2
+fi
+
+app="$1"
+
+if [ -e "$app" ]; then
+    >&2 echo "fatal: the path \"$app\" already exists"
+    exit 3
+fi
+
+express --view=ejs --css=sass --git "$app"
+cd "$app"
+git init
+git add .
+git commit -m "Generate an Express app."
+
+npm install
+git add package-lock.json
+git commit -m "Install dependencies."
+
+echo
+echo "New git repo created at: $app"
+echo
