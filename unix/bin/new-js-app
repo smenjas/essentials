@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+for dep in npm git; do
+    if [ ! "$(which $dep)" ]; then
+        >&2 echo "fatal: $dep is not installed"
+        exit 1
+    fi
+done
+
+if [ $# -lt 1 ]; then
+    >&2 echo
+    >&2 echo "usage: $(basename $0) app"
+    >&2 echo "... where \"app\" is the directory name to be created."
+    >&2 echo
+    exit 2
+fi
+
+app="$1"
+
+if [ -e "$app" ]; then
+    >&2 echo "fatal: the path \"$app\" already exists"
+    exit 3
+fi
+
+mkdir "$app"
+cd "$app"
+git init
+
+echo "# $app" >> README.md
+echo ".DS_Store" >> .gitignore
+echo "node_modules" >> .gitignore
+git add README.md .gitignore
+git commit -m "Add a readme and a .gitignore file."
+
+npm init
+git add package.json
+git commit -m "npm init"
+
+npm install express body-parser
+git add package.json package-lock.json
+git commit -m "Install Express."
+
+npm install --save-dev jest
+git add package.json package-lock.json
+git commit -m "Install Jest."
+
+npm install --save-dev @babel/core @babel/cli
+git add package.json package-lock.json
+git commit -m "Install Babel."
+
+echo
+echo "New git repo created at: $app"
+echo
