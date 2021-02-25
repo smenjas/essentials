@@ -36,7 +36,7 @@ npm init
 git add package.json
 git commit -m "npm init"
 
-npm install express body-parser
+npm install express
 git add package.json package-lock.json
 git commit -m "Install Express."
 
