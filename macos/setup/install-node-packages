@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+# Update npm first.
 packages=(
     npm
+    nodemon
     express-generator
     yarn
 )
