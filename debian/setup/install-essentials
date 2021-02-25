@@ -10,7 +10,6 @@ apt-get install -y $(cat essentials.txt)
 
 ./install-grunt
 ./link-node
+./install-node-packages
 ./install-visual-studio-code
 ./install-kernel-dependencies
-
-npm install -g express-generator
