@@ -3,7 +3,6 @@
 
 PS1='\t \u@\h:\w \$ '
 
-PATH="$PATH:$HOME/.rvm/bin"
 PATH="/usr/bin:$PATH"
 PATH="/usr/local/sbin:$PATH"
 PATH="/usr/local/bin:$PATH" # Prioritize Homebrew commands.

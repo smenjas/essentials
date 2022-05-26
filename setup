@@ -26,6 +26,5 @@ fi
 # Some install scripts want you to be you (not root).
 ./install-git-completion
 ./install-git-remote-hg
-./install-rvm
 
 [ -x tweak-ui ] && ./tweak-ui
