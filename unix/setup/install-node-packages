@@ -5,6 +5,7 @@ packages=(
     npm
     nodemon
     express-generator
+    typescript
     yarn
 )
 
