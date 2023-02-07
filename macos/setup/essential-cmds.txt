@@ -1,5 +1,7 @@
 clisp
 clojure
+cmake
+cmake-docs
 curl
 deno
 emacs
