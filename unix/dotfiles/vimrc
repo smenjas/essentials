@@ -3,9 +3,9 @@ set fileencoding=utf-8
 set ruler
 syntax enable
 
-set tabstop=8
+set tabstop=4
 set expandtab
-set shiftwidth=2
+set shiftwidth=4
 set autoindent
 set smartindent
 "" set cindent
