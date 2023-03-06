@@ -27,6 +27,7 @@ rakudo
 ripgrep
 rsync
 rust
+sbcl
 scala
 sqlite
 tcl-tk
