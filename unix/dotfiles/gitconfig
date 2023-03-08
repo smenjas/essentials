@@ -1,106 +1,106 @@
 #[user]
-#	name = Your Name
-#	email = you@example.com
+#    name = Your Name
+#    email = you@example.com
 
 [alias]
-        hist = "log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short"
-        type = cat-file -t
-        dump = cat-file -p
+    hist = "log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short"
+    type = cat-file -t
+    dump = cat-file -p
 
-	bb = "bisect bad"
-	bg = "bisect good"
-	br = "bisect reset"
-	bs = "bisect start"
+    bb = "bisect bad"
+    bg = "bisect good"
+    br = "bisect reset"
+    bs = "bisect start"
 
-	bd = "branch -d"
-	bm = "branch -m"
-	bra = "branch"
-	brav = "branch -v"
-	brava = "branch -va"
+    bd = "branch -d"
+    bm = "branch -m"
+    bra = "branch"
+    brav = "branch -v"
+    brava = "branch -va"
 
-	ca  = "commit --amend -v"
-	caa = "commit --amend -av"
-	ci  = commit
-	cm  = "commit -m"
-	cma = "commit -am"
-	co  = checkout
-	cob = "checkout -b"
-	com = "checkout main"
-	cp  = cherry-pick
+    ca  = "commit --amend -v"
+    caa = "commit --amend -av"
+    ci  = commit
+    cm  = "commit -m"
+    cma = "commit -am"
+    co  = checkout
+    cob = "checkout -b"
+    com = "checkout main"
+    cp  = cherry-pick
 
-	d   = "diff"
-	dc  = "diff --cached"
-	dcs = "diff --cached --stat"
-	ds  = "diff --stat"
+    d   = "diff"
+    dc  = "diff --cached"
+    dcs = "diff --cached --stat"
+    ds  = "diff --stat"
 
-	l     = "log --pretty=fuller --summary --stat -M -C"
-	lm    = "log --pretty=fuller --summary --stat -M -C main.."
-	lom   = "log --pretty=fuller --summary --stat -M -C origin/main.."
-	lr    = "log --pretty=fuller --summary --stat -M -C --reverse"
-	lrm   = "log --pretty=fuller --summary --stat -M -C --reverse main.."
-	lrom  = "log --pretty=fuller --summary --stat -M -C --reverse origin/main.."
-	lp    = "log --pretty=fuller --summary --stat -M -C -p"
-	lpm   = "log --pretty=fuller --summary --stat -M -C -p main.."
-	lpom  = "log --pretty=fuller --summary --stat -M -C -p origin/main.."
-	lpr   = "log --pretty=fuller --summary --stat -M -C -p --reverse"
-	lprm  = "log --pretty=fuller --summary --stat -M -C -p --reverse main.."
-	lprom = "log --pretty=fuller --summary --stat -M -C -p --reverse origin/main.."
-	lf    = "log --abbrev=10 --date=short --pretty=format:'%h %cd %an	%s'"
-	lfm   = "log --abbrev=10 --date=short --pretty=format:'%h %cd %an	%s' main.."
-	lfom  = "log --abbrev=10 --date=short --pretty=format:'%h %cd %an	%s' origin/main.."
-	lfr   = "log --abbrev=10 --date=short --pretty=format:'%h %cd %an	%s' --reverse"
-	lfrm  = "log --abbrev=10 --date=short --pretty=format:'%h %cd %an	%s' --reverse main.."
-	lfrom = "log --abbrev=10 --date=short --pretty=format:'%h %cd %an	%s' --reverse origin/main.."
+    l     = "log --pretty=fuller --summary --stat -M -C"
+    lm    = "log --pretty=fuller --summary --stat -M -C main.."
+    lom   = "log --pretty=fuller --summary --stat -M -C origin/main.."
+    lr    = "log --pretty=fuller --summary --stat -M -C --reverse"
+    lrm   = "log --pretty=fuller --summary --stat -M -C --reverse main.."
+    lrom  = "log --pretty=fuller --summary --stat -M -C --reverse origin/main.."
+    lp    = "log --pretty=fuller --summary --stat -M -C -p"
+    lpm   = "log --pretty=fuller --summary --stat -M -C -p main.."
+    lpom  = "log --pretty=fuller --summary --stat -M -C -p origin/main.."
+    lpr   = "log --pretty=fuller --summary --stat -M -C -p --reverse"
+    lprm  = "log --pretty=fuller --summary --stat -M -C -p --reverse main.."
+    lprom = "log --pretty=fuller --summary --stat -M -C -p --reverse origin/main.."
+    lf    = "log --abbrev=10 --date=short --pretty=format:'%h %cd %an    %s'"
+    lfm   = "log --abbrev=10 --date=short --pretty=format:'%h %cd %an    %s' main.."
+    lfom  = "log --abbrev=10 --date=short --pretty=format:'%h %cd %an    %s' origin/main.."
+    lfr   = "log --abbrev=10 --date=short --pretty=format:'%h %cd %an    %s' --reverse"
+    lfrm  = "log --abbrev=10 --date=short --pretty=format:'%h %cd %an    %s' --reverse main.."
+    lfrom = "log --abbrev=10 --date=short --pretty=format:'%h %cd %an    %s' --reverse origin/main.."
 
-	rb   = "rebase"
-	rbm  = "rebase main"
-	ri   = "rebase -i"
-	rim  = "rebase -i main"
-	riom = "rebase -i origin/main"
+    rb   = "rebase"
+    rbm  = "rebase main"
+    ri   = "rebase -i"
+    rim  = "rebase -i main"
+    riom = "rebase -i origin/main"
 
-	ra = "rebase --abort"
-	rc = "rebase --continue"
-	rs = "rebase --skip"
+    ra = "rebase --abort"
+    rc = "rebase --continue"
+    rs = "rebase --skip"
 
-	rmc = "rm --cached"
-	rh = "reset --hard"
-	st = status
-	stu = "status -uno"
-	unstage = reset HEAD --
+    rmc = "rm --cached"
+    rh = "reset --hard"
+    st = status
+    stu = "status -uno"
+    unstage = reset HEAD --
 
-	sa = "submodule add"
-	si = "submodule init"
-	sd = "submodule deinit"
-	sf = "submodule foreach"
-	sst = "submodule status"
-	ssu = "submodule summary"
-	ssy = "submodule sync"
-	su = "submodule update"
+    sa = "submodule add"
+    si = "submodule init"
+    sd = "submodule deinit"
+    sf = "submodule foreach"
+    sst = "submodule status"
+    ssu = "submodule summary"
+    ssy = "submodule sync"
+    su = "submodule update"
 
 [color]
-	ui = auto
-	status = auto
-	branch = auto
-	interactive = auto
-	diff = auto
+    ui = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    diff = auto
 
 [core]
-	autocrlf = input
-	safecrlf = warn
-	editor = vim
+    autocrlf = input
+    safecrlf = warn
+    editor = vim
 
 [diff]
-	algorithm = patience
-	renamelimit = 0
+    algorithm = patience
+    renamelimit = 0
 
 [merge]
-	tool = vimdiff
+    tool = vimdiff
 
 [pull]
-	rebase = false
+    rebase = false
 
 [push]
-	default = simple
+    default = simple
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
