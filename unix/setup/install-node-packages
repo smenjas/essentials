@@ -9,7 +9,8 @@ packages=(
     yarn
 )
 
-for package in packages; do
+for package in ${packages[@]}; do
+    echo "Installing ${package}..."
     npm install -g "$package"
 done
 
