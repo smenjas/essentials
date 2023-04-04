@@ -34,6 +34,5 @@ sqlite
 tcl-tk
 tmux
 tree
-typescript
 vim
 wget
