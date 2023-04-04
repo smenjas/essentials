@@ -9,6 +9,8 @@ julia
 kiwix
 meld
 mysqlworkbench
+obs
+postman
 pycharm
 sketchup
 spectacle

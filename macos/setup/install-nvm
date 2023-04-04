@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ ! -f /usr/local/opt/nvm/nvm.sh ]; then
+    brew install nvm
+fi
+
+if [ ! -d ~/.nvm ]; then
+    mkdir ~/.nvm
+fi

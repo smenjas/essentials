@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# When the package name and the command name are different, this makes sense.
+
+if [ ! "$1" ]; then
+    >&2 echo "usage: $0 <pacakge> [command]"
+fi
+
+pkg="$1"
+
+if [ "$2" ]; then
+    cmd="$2"
+else
+    cmd="$pkg"
+fi
+
+if [ -n "$(which "$cmd")" ]; then
+    echo "$pkg is already installed."
+    exit 0
+fi
+
+brew install "$pkg"

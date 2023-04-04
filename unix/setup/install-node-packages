@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-function install-globally {
+install_globally() {
     if [ -z "$1" ]; then
-        echo 2>&1 "usage: $0 <package>"
+        >&2 echo "usage: $0 <package>"
         return 1
     fi
     npm install -g "$1" | grep -v fund | grep -v '^$'
@@ -13,7 +13,7 @@ if [ -z "$(which npm)" ]; then
 else
     echo "Updating npm..."
 fi
-install-globally npm
+install_globally npm
 
 packages=(
     nodemon
@@ -21,23 +21,16 @@ packages=(
 )
 
 for package in ${packages[@]}; do
-    if [ ! -z "$(which "$package")" ]; then
+    if [ -n "$(which "$package")" ]; then
         echo "$package is already installed."
         continue
     fi
     echo "Installing ${package}..."
-    install-globally "$package"
+    install_globally "$package"
 done
 
-if [ -z "$(which express)" ]; then
-    echo "Installing express-generator..."
-    install-globally express-generator
-fi
-
-if [ -z "$(which tsc)" ]; then
-    echo "Installing typescript..."
-    install-globally typescript
-fi
+./install-node-package express-generator express
+./install-node-package typescript tsc
 
 echo "npm audit fix"
 npm audit fix | grep -v fund | grep -v '^$'

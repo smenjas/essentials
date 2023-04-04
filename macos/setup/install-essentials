@@ -24,9 +24,10 @@ for pkg in $(cat essential-apps.txt); do
     fi
 done
 
-if [ ! -d ~/.nvm ]; then
-    mkdir ~/.nvm
-fi
+./install-homebrew-package mysql@5.7 mysql
+./install-homebrew-package rust rustc
+./install-homebrew-package tcl-tk tclsh
 
 ./install-node-packages
-./install-python-modules
+./install-nvm
+#./install-python-modules
