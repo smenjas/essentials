@@ -1,18 +1,43 @@
 #!/usr/bin/env bash
 
-# Update npm first.
+function install-globally {
+    if [ -z "$1" ]; then
+        echo 2>&1 "usage: $0 <package>"
+        return 1
+    fi
+    npm install -g "$1" | grep -v fund | grep -v '^$'
+}
+
+if [ -z "$(which npm)" ]; then
+    echo "Installing npm..."
+else
+    echo "Updating npm..."
+fi
+install-globally npm
+
 packages=(
-    npm
     nodemon
-    express-generator
-    typescript
     yarn
 )
 
 for package in ${packages[@]}; do
+    if [ ! -z "$(which "$package")" ]; then
+        echo "$package is already installed."
+        continue
+    fi
     echo "Installing ${package}..."
-    npm install -g "$package"
+    install-globally "$package"
 done
 
-npm audit fix
+if [ -z "$(which express)" ]; then
+    echo "Installing express-generator..."
+    install-globally express-generator
+fi
 
+if [ -z "$(which tsc)" ]; then
+    echo "Installing typescript..."
+    install-globally typescript
+fi
+
+echo "npm audit fix"
+npm audit fix | grep -v fund | grep -v '^$'
