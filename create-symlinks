@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function symlink()
+symlink()
 {
     if [ -z "$1" ] || [ -z "$2" ]; then
         echo "usage: symlink <source> <target>" >&2
