@@ -16,7 +16,8 @@ kotlin
 maven
 multitail
 mysql@5.7
-nodejs
+node
+nvm
 obs
 postman
 pv

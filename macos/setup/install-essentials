@@ -24,5 +24,9 @@ for pkg in $(cat essential-apps.txt); do
     fi
 done
 
+if [ ! -d ~/.nvm ]; then
+    mkdir ~/.nvm
+fi
+
 ./install-node-packages
 ./install-python-modules
