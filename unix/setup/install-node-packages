@@ -16,6 +16,7 @@ fi
 install_globally npm
 
 packages=(
+    cjs-to-es6
     nodemon
     yarn
 )
