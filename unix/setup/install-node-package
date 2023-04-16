@@ -4,6 +4,7 @@
 
 if [ ! "$1" ]; then
     >&2 echo "usage: $0 <pacakge> [command]"
+    exit 1
 fi
 
 pkg="$1"
