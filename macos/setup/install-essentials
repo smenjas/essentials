@@ -3,6 +3,11 @@
 #sudo ./remove-macports
 ./install-homebrew
 
+if ! type brew >/dev/null; then
+    echo "brew not found"
+    exit 1
+fi
+
 # Install command line programs.
 for pkg in $(cat essential-cmds.txt); do
     if [ "$(which $pkg)" ]; then
