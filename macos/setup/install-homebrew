@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ ! -z $(which brew) ] && [ "$1" != "-f" ]; then
+if type brew >/dev/null && [ "$1" != "-f" ]; then
     echo "brew is already installed"
     echo "Use \"$0 -f\" to force installation."
     exit 1
