@@ -3,7 +3,8 @@
 # When the package name and the command name are different, this makes sense.
 
 if [ ! "$1" ]; then
-    >&2 echo "usage: $0 <pacakge> [command]"
+    >&2 echo "usage: $0 <package> [command]"
+    exit 1
 fi
 
 pkg="$1"
