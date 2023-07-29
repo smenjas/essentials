@@ -24,6 +24,7 @@ rg
 rsync
 sbcl
 scala
+sloccount
 sqlite3
 tmux
 tree
