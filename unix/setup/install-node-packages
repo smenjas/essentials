@@ -31,6 +31,7 @@ for package in ${packages[@]}; do
 done
 
 ./install-node-package express-generator express
+./install-node-package sloc
 ./install-node-package typescript tsc
 
 echo "npm audit fix"
