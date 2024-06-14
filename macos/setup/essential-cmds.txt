@@ -12,6 +12,7 @@ go
 ipython
 jupyter
 kotlin
+mars
 mvn
 multitail
 node
