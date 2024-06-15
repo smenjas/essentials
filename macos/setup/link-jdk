@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# Allow the system Java wrappers to find the JDK.
+
+sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk

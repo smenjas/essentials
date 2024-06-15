@@ -16,6 +16,7 @@ mars
 mvn
 multitail
 node
+openjdk
 pv
 pypy3
 python3
