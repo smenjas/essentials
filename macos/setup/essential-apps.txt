@@ -12,7 +12,6 @@ mysqlworkbench
 obs
 postman
 pycharm
-sketchup
 spectacle
 steam
 transmission
