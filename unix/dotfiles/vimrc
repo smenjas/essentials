@@ -10,3 +10,5 @@ set autoindent
 set smartindent
 set showmatch
 "" set cindent
+
+set shortmess-=S "" Show search count.
