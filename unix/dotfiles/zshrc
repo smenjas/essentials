@@ -2,3 +2,6 @@
 
 PATH="$HOME/bin:$PATH"
 export PATH
+
+# Turn on git completion.
+autoload -Uz compinit && compinit
