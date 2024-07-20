@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Install Ghidra, a software reverse engineering suite of tools.
+
+# Install Java 17+
+brew install --cask temurin
+
+# Install Rosetta 2, to run Intel binaries.
+# Note that it is very difficult to remove Rosetta 2.
+softwareupdate --install-rosetta --agree-to-license
+
+# Install Ghidra.
+brew install --cask ghidra
