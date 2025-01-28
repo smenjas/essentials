@@ -1,9 +1,11 @@
 clisp
 clojure
 cmake
+cowsay
 curl
 deno
 emacs
+figlet
 gcc
 geckodriver
 gh
