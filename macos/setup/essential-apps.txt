@@ -1,3 +1,4 @@
+blender
 calibre
 discord
 firefox
