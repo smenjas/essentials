@@ -1,6 +1,7 @@
 blender
 calibre
 claude
+cursor
 discord
 firefox
 google-chrome
