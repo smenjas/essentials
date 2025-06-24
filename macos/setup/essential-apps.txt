@@ -4,6 +4,7 @@ claude
 cursor
 discord
 firefox
+gimp
 google-chrome
 graphiql
 java
