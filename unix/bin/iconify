@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if [ $# -lt 1 ]; then
+    echo "usage: $0 <image.png>" >&2
+    exit 1
+fi
+
+basename="${1%.*}"
+ext="${1##*.}"
+
+for res in 16 32 57 60 70 72 76 96 120 128 152 167 180 192
+do
+    target="${basename}-${res}.${ext}"
+    echo "Generating: $target"
+    magick "$1" -resize "${res}x${res}" "$target"
+done
