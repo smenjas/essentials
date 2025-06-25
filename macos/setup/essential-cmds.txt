@@ -19,6 +19,7 @@ mvn
 multitail
 node
 openjdk
+pngcheck
 pv
 pypy3
 python3
