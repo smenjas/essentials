@@ -1,4 +1,5 @@
 clisp
+closure-compiler
 clojure
 cmake
 cowsay
