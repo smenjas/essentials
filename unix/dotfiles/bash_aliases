@@ -6,6 +6,8 @@ alias ls="ls -FG" # Decorate and color output
 alias ll="ls -l"
 alias la="ls -la"
 
+alias viewdiff="vimdiff -R"
+
 alias megs='du -sm * | sort -nr -k1,1'
 alias gigs='du -sm * | sort -nr -k1,1'
 
