@@ -17,6 +17,7 @@ mysqlworkbench
 obs
 postman
 pycharm
+repo-prompt
 spectacle
 steam
 transmission
