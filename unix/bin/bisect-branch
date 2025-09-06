@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+git bisect start
+git bisect bad
+git bisect good main
+git bisect run npm run test
