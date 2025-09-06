@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+if [ $# -gt 0 ]; then
+    good="$1"
+else
+    good="main"
+fi
+
+echo "Starting bisect from: $good"
+
 git bisect start
 git bisect bad
 git bisect good main
