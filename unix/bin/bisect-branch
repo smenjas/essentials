@@ -4,3 +4,4 @@ git bisect start
 git bisect bad
 git bisect good main
 git bisect run npm run test
+git bisect reset
