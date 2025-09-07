@@ -10,7 +10,7 @@ echo "Starting bisect from: $good"
 
 git bisect start
 git bisect bad
-git bisect good main
+git bisect good "$good"
 git bisect run npm run test
 echo
 git bisect reset
