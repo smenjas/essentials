@@ -4,6 +4,7 @@ calibre
 claude
 cursor
 discord
+finetune
 firefox
 gimp
 google-chrome
