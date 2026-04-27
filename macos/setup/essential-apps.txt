@@ -3,7 +3,6 @@ blender
 calibre
 claude
 claude-code
-cursor
 discord
 finetune
 firefox
