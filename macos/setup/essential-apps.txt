@@ -8,6 +8,7 @@ finetune
 firefox
 gimp
 google-chrome
+google-gemini
 graphiql
 java
 julia
