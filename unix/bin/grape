@@ -1,0 +1,63 @@
+#!/usr/bin/env perl
+
+# Accent-insensitive grep that searches files for patterns regardless of diacritics.
+# Strips combining marks (NFD) to match terms like "Poincare" with "Poincaré".
+# Defaults to searching tracked/unignored Git files, falling back to a pruned 'find'.
+
+use strict;
+use warnings;
+use utf8;
+use open ':std', ':encoding(UTF-8)';
+use Unicode::Normalize;
+
+my $pattern = shift @ARGV;
+die "Usage: $0 <pattern> [file|dir ...]\n" unless defined $pattern;
+
+# Normalize target pattern (NFD decomposition + strip combining marks)
+my $norm_pattern = NFD($pattern);
+$norm_pattern =~ s/\p{M}//g;
+
+# Determine file list to search
+my @files = @ARGV;
+
+if (!@files) {
+    # Check if we are inside a Git repository
+    system('git rev-parse --is-inside-work-tree >/dev/null 2>&1');
+    if ($? == 0) {
+        # Inside git repo: fast list of tracked + non-ignored untracked files
+        open(my $fh, '-|', 'git', 'ls-files', '-c', '-o', '--exclude-standard')
+            or die "Failed to run git ls-files: $!\n";
+        @files = map { chomp; $_ } <$fh>;
+        close($fh);
+    } else {
+        # Outside git repo: scoped recursive find skipping hidden dirs and common heavy folders
+        open(my $fh, '-|', 'find', '.',
+            '(', '-name', '.*', '-o', '-name', 'node_modules', '-o', '-name', 'target', '-o', '-name', 'build', ')', '-prune',
+            '-o', '-type', 'f', '-print') or die "Failed to run find: $!\n";
+        @files = map { chomp; $_ } <$fh>;
+        close($fh);
+    }
+}
+
+# Iterate through files safely
+foreach my $file (@files) {
+    next unless -f $file && -T $file; # Skip non-regular or binary files
+
+    if (open(my $fh, '<:encoding(UTF-8)', $file)) {
+        while (my $line = <$fh>) {
+            my $norm_line = NFD($line);
+            $norm_line =~ s/\p{M}//g;
+
+            if ($norm_line =~ /\Q$norm_pattern\E/i) {
+                # Format output similar to git grep (file: line)
+                if (@files > 1) {
+                    print "$file:$line";
+                } else {
+                    print $line;
+                }
+            }
+        }
+        close($fh);
+    }
+}
+
