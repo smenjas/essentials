@@ -9,7 +9,6 @@ emacs
 figlet
 gcc
 geckodriver
-gemini-cli
 gh
 git
 go
