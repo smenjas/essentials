@@ -24,7 +24,7 @@ obs-studio
 npm
 openssh-server
 pv
-pypy3
+pypy
 python3
 python-pip
 rakudo

@@ -24,7 +24,7 @@ node
 openjdk
 pngcheck
 pv
-pypy3
+pypy
 python3
 r
 rakudo
