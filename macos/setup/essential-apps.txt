@@ -1,4 +1,5 @@
 android-studio
+anki
 blender
 calibre
 claude
